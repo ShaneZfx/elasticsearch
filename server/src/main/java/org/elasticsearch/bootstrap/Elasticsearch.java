@@ -79,6 +79,7 @@ class Elasticsearch extends EnvironmentAwareCommand {
          * presence of a security manager or lack thereof act as if there is a security manager present (e.g., DNS cache policy). This
          * forces such policies to take effect immediately.
          */
+        // 设置安全管理器？？
         System.setSecurityManager(new SecurityManager() {
 
             @Override
@@ -89,6 +90,7 @@ class Elasticsearch extends EnvironmentAwareCommand {
         });
         LogConfigurator.registerErrorListener();
         final Elasticsearch elasticsearch = new Elasticsearch();
+        // 传入启动参数、es启动类对象、默认终端类对象
         int status = main(args, elasticsearch, Terminal.DEFAULT);
         if (status != ExitCodes.OK) {
             final String basePath = System.getProperty("es.logs.base_path");

@@ -152,7 +152,7 @@ public class Version implements Comparable<Version>, ToXContentFragment {
     public static final Version V_7_10_1 = new Version(7100199, org.apache.lucene.util.Version.LUCENE_8_7_0);
     public static final Version V_7_10_2 = new Version(7100299, org.apache.lucene.util.Version.LUCENE_8_7_0);
     public static final Version V_7_10_3 = new Version(7100399, org.apache.lucene.util.Version.LUCENE_8_7_0);
-    public static final Version CURRENT = V_7_10_3;
+    public static final Version CURRENT = V_7_10_0;
 
     private static final ImmutableOpenIntMap<Version> idToVersion;
     private static final ImmutableOpenMap<String, Version> stringToVersion;
@@ -527,11 +527,7 @@ public class Version implements Comparable<Version>, ToXContentFragment {
 
         Version version = (Version) o;
 
-        if (id != version.id) {
-            return false;
-        }
-
-        return true;
+        return id == version.id;
     }
 
     @Override
@@ -549,7 +545,7 @@ public class Version implements Comparable<Version>, ToXContentFragment {
      * have an alpha version.
      */
     public boolean isAlpha() {
-        return major < 5 ? false :  build < 25;
+        return major >= 5 && build < 25;
     }
 
     public boolean isRC() {

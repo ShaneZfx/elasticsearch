@@ -63,6 +63,7 @@ public abstract class Command implements Closeable {
 
     /** Parses options for this command from args and executes it. */
     public final int main(String[] args, Terminal terminal) throws Exception {
+        // 添加钩子函数
         if (addShutdownHook()) {
 
             shutdownHookThread = new Thread(() -> {
@@ -84,6 +85,7 @@ public abstract class Command implements Closeable {
             Runtime.getRuntime().addShutdownHook(shutdownHookThread);
         }
 
+        // 主函数执行前的线程
         beforeMain.run();
 
         try {
